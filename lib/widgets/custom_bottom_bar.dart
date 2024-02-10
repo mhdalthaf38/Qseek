@@ -29,7 +29,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     BottomMenuModel(
       icon: ImageConstant.imgNavupload,
       activeIcon: ImageConstant.imgNavupload,
-      title: "feed",
+      title: "upload",
       type: BottomBarEnum.Upload,
     ),
     BottomMenuModel(

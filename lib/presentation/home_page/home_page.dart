@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mohammed_s_application1/widgets/custom_elevated_button.dart';
+
 import '../home_page/widgets/home_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:mohammed_s_application1/core/app_export.dart';
@@ -7,15 +10,21 @@ import 'package:mohammed_s_application1/widgets/app_bar/appbar_subtitle.dart';
 import 'package:mohammed_s_application1/widgets/app_bar/appbar_subtitle_2.dart';
 import 'package:mohammed_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:mohammed_s_application1/widgets/custom_icon_button.dart';
+
 import 'package:mohammed_s_application1/widgets/custom_search_view.dart';
 
 // ignore_for_file: must_be_immutable
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key})
       : super(
           key: key,
         );
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -430,33 +439,161 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: getPadding(
-                      left: 24,
-                      top: 16,
-                      right: 24,
-                    ),
-                    child: ListView.separated(
-                      physics: ScrollPhysics(),
-                      shrinkWrap: true,
-                      separatorBuilder: (
-                        context,
-                        index,
-                      ) {
-                        return SizedBox(
-                          height: getVerticalSize(16),
-                        );
-                      },
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return HomeItemWidget();
-                      },
-                    ),
-                  ),
+                  child: Align(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: firestoreService.getDataStream(),
+                  builder: (context, snapshot) {
+                    // if we have data get all the doc
+                    if (snapshot.hasData) {
+                      List Datalist = snapshot.data!.docs;
+                      //display as  a list
+                      return ListView.builder(
+                        itemCount: Datalist.length,
+                        itemBuilder: (context, index) {
+                          //get each individual doc
+
+                          DocumentSnapshot document = Datalist[index];
+                          String docID = document.id;
+
+                          //get note frome each doc
+                          Map<String, dynamic> data =
+                              document.data() as Map<String, dynamic>;
+                          String name = data['name'];
+                          String jobtype = data['jobtype'];
+                          String jobDiscription = data['jobDiscription'];
+
+                          String salary = data['salary'];
+                          int number = data['number'];
+
+                          // diaplay as a list tile
+                          return Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                padding: getPadding(
+                                  all: 16,
+                                ),
+                                decoration:
+                                    AppDecoration.outlineIndigo.copyWith(
+                                  borderRadius:
+                                      BorderRadiusStyle.roundedBorder16,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomIconButton(
+                                          height: getSize(48),
+                                          width: getSize(48),
+                                          padding: getPadding(
+                                            all: 8,
+                                          ),
+                                          child: CustomImageView(
+                                            svgPath:
+                                                ImageConstant.imgGroupPrimary,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: getPadding(
+                                            left: 12,
+                                            top: 4,
+                                            bottom: 2,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "",
+                                                style: CustomTextStyles
+                                                    .titleMediumBold_1,
+                                              ),
+                                              Padding(
+                                                padding: getPadding(
+                                                  top: 5,
+                                                ),
+                                                child: Text(
+                                                  name,
+                                                  style: CustomTextStyles
+                                                      .labelLargeBluegray300SemiBold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        CustomImageView(
+                                          svgPath: ImageConstant.imgBookmark,
+                                          height: getSize(24),
+                                          width: getSize(24),
+                                          margin: getMargin(
+                                            bottom: 25,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: getPadding(
+                                        left: 60,
+                                        top: 9,
+                                      ),
+                                      child: Text(
+                                        jobtype,
+                                        style: CustomTextStyles
+                                            .labelLargeGray600_1,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: getPadding(
+                                          top: 13,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CustomElevatedButton(
+                                              height: getVerticalSize(28),
+                                              width: getHorizontalSize(70),
+                                              text: salary,
+                                              buttonTextStyle:
+                                                  theme.textTheme.labelLarge!,
+                                            ),
+                                            CustomElevatedButton(
+                                              height: getVerticalSize(28),
+                                              width: getHorizontalSize(103),
+                                              text: jobDiscription,
+                                              margin: getMargin(
+                                                left: 8,
+                                              ),
+                                              buttonTextStyle:
+                                                  theme.textTheme.labelLarge!,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                      // there is no data return
+                    } else {
+                      return const Text("no data");
+                    }
+                  },
                 ),
-              ),
+              )),
             ],
           ),
         ),
