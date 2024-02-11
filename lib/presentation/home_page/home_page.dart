@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:mohammed_s_application1/widgets/custom_elevated_button.dart';
 
 import '../home_page/widgets/home_item_widget.dart';
@@ -65,6 +67,7 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             AppbarImage1(
+              onTap: logOut,
               svgPath: ImageConstant.imgNotification,
               margin: getMargin(
                 left: 24,
@@ -599,5 +602,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void logOut() {
+    FirebaseAuth.instance.signOut();
   }
 }
