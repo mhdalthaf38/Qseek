@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mohammed_s_application1/presentation/login_screen/auth_page.dart';
 import 'package:mohammed_s_application1/theme/theme_helper.dart';
 import 'package:mohammed_s_application1/routes/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +20,6 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
 
-  ///Please update theme as per your need if required.
   ThemeHelper().changeTheme('primary');
   runApp(MyApp());
 }
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
       theme: theme,
       title: 'mohammed_s_application1',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splashScreen,
+      // initialRoute: AppRoutes.splashScreen,
+      home: AuthPage(),
       routes: AppRoutes.routes,
     );
   }
