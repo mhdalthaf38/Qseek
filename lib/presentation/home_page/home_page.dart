@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mohammed_s_application1/presentation/upload_page/upload_page.dart';
 import 'package:mohammed_s_application1/widgets/custom_elevated_button.dart';
 
 import '../home_page/widgets/home_item_widget.dart';
@@ -29,6 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -467,7 +469,6 @@ class _HomePageState extends State<HomePage> {
                           //get each individual doc
 
                           DocumentSnapshot document = Datalist[index];
-                          String docID = document.id;
 
                           //get note frome each doc
                           Map<String, dynamic> data =
@@ -478,6 +479,7 @@ class _HomePageState extends State<HomePage> {
 
                           String salary = data['salary'];
                           int number = data['number'];
+                          String imgurl = data['image'];
 
                           // diaplay as a list tile
                           return Padding(
@@ -515,7 +517,7 @@ class _HomePageState extends State<HomePage> {
                                             .fillOnPrimaryContainer,
                                         child: ClipOval(
                                           child: CustomImageView(
-                                            imagePath: ImageConstant.fyp,
+                                            url: imgurl,
                                             width: 100,
                                             height: 100,
                                           ),

@@ -44,17 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigateTohome() async {
-    await Future.delayed(Duration(seconds: 2), () async {
-      print('first');
-      WidgetsFlutterBinding.ensureInitialized();
-      await Firebase.initializeApp(
-          name: 'uploadpage', options: DefaultFirebaseOptions.currentPlatform);
-      FirebaseFirestore.instance.settings =
-          const Settings(persistenceEnabled: true);
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-      ]);
-    });
+    await Future.delayed(Duration(seconds: 2), () {});
 
     Navigator.pushReplacement(
       context,
