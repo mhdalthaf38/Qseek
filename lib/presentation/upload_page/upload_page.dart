@@ -79,140 +79,219 @@ class _UploadPageState extends State<UploadPage> {
                 }),
             centerTitle: true,
             title: AppbarTitle(text: "Upload")),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: namecontroller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("name"),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: jobtypecontroller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("job type"),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: salarycontroller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("salary"),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: numbercontroller,
-                  keyboardType: TextInputType.number,
-                  maxLength: 10,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("phone number"),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: jobdiscriptioncontroller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("job description"),
-                  ),
-                ),
-              ),
-
-              //botton to save
-
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(243, 6, 26, 80))),
-                    onPressed: () {
-                      if (namecontroller.text == "") {
-                        _validate = false;
-                      } else if (jobtypecontroller.text == "") {
-                        _validate = false;
-                      } else if (salarycontroller.text == "") {
-                        _validate = false;
-                      } else if (numbercontroller.text == "") {
-                        _validate = false;
-                      } else if (jobdiscriptioncontroller.text == "") {
-                        _validate = false;
-                      } else {
-                        _validate = true;
-                      }
-                      if (_validate == false) {
-                        showDialog(
-                          context: context,
-                          builder: (ctx) => PlaceholderDialog(
-                            icon: Icon(
-                              Icons.error_outline,
-                              color: Colors.teal,
-                              size: 80.0,
-                            ),
-                            title: 'submit Failed',
-                            message: 'you must need to enter the details',
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(ctx).pop(),
-                                child: Text('!Got It'),
-                              ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 65,
+                        backgroundImage:
+                            AssetImage("assets/images/img_ProfilePic.webp"),
+                      ),
+                      Positioned(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.add_a_photo_outlined,
+                            size: 30,
+                            shadows: [
+                              Shadow(
+                                  color: Color.fromRGBO(238, 242, 245, 1),
+                                  offset: Offset.zero,
+                                  blurRadius: 1)
                             ],
                           ),
-                        );
-                      } else {
-                        //add data to firebase
-                        firestoreService.addData(
-                            namecontroller.text,
-                            jobtypecontroller.text,
-                            salarycontroller.text,
-                            numbercontroller.hashCode,
-                            jobdiscriptioncontroller.text);
+                        ),
+                        bottom: -10,
+                        left: 80,
+                      )
+                    ],
+                  ),
+                ),
 
-                        // clear the text controller
-
-                        namecontroller.clear();
-                        jobtypecontroller.clear();
-                        salarycontroller.clear();
-                        numbercontroller.clear();
-                        jobdiscriptioncontroller.clear();
-
-                        // clear the page
-
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800),
+                //textfield
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: namecontroller,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        shadows: [
+                          Shadow(
+                              color: Color.fromRGBO(0, 56, 101, 1),
+                              offset: Offset.zero,
+                              blurRadius: 1)
+                        ],
+                      ),
+                      border: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.teal)),
+                      label: Text("name"),
                     ),
                   ),
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: jobtypecontroller,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.business_sharp,
+                        shadows: [
+                          Shadow(
+                              color: Color.fromRGBO(0, 56, 101, 1),
+                              offset: Offset.zero,
+                              blurRadius: 1)
+                        ],
+                      ),
+                      border: OutlineInputBorder(),
+                      label: Text("job type"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: salarycontroller,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.money,
+                        shadows: [
+                          Shadow(
+                              color: Color.fromRGBO(0, 56, 101, 1),
+                              offset: Offset.zero,
+                              blurRadius: 1)
+                        ],
+                      ),
+                      border: OutlineInputBorder(),
+                      label: Text("salary"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: numbercontroller,
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        shadows: [
+                          Shadow(
+                              color: Color.fromRGBO(0, 56, 101, 1),
+                              offset: Offset.zero,
+                              blurRadius: 1)
+                        ],
+                      ),
+                      border: OutlineInputBorder(),
+                      label: Text("phone number"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: jobdiscriptioncontroller,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.place,
+                        shadows: [
+                          Shadow(
+                              color: Color.fromRGBO(0, 56, 101, 1),
+                              offset: Offset.zero,
+                              blurRadius: 1)
+                        ],
+                      ),
+                      border: OutlineInputBorder(),
+                      label: Text("place"),
+                    ),
+                  ),
+                ),
+
+                //botton to save
+
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(0, 56, 101, 1))),
+                      onPressed: () {
+                        if (namecontroller.text == "") {
+                          _validate = false;
+                        } else if (jobtypecontroller.text == "") {
+                          _validate = false;
+                        } else if (salarycontroller.text == "") {
+                          _validate = false;
+                        } else if (numbercontroller.text == "") {
+                          _validate = false;
+                        } else if (jobdiscriptioncontroller.text == "") {
+                          _validate = false;
+                        } else {
+                          _validate = true;
+                        }
+                        if (_validate == false) {
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => PlaceholderDialog(
+                              icon: Icon(
+                                Icons.error_outline,
+                                color: Colors.teal,
+                                size: 80.0,
+                              ),
+                              title: 'submit Failed',
+                              message: 'you must need to enter the details',
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(ctx).pop(),
+                                  child: Text('!Got It'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          //add data to firebase
+                          firestoreService.addData(
+                              namecontroller.text,
+                              jobtypecontroller.text,
+                              salarycontroller.text,
+                              numbercontroller.hashCode,
+                              jobdiscriptioncontroller.text);
+
+                          // clear the text controller
+
+                          namecontroller.clear();
+                          jobtypecontroller.clear();
+                          salarycontroller.clear();
+                          numbercontroller.clear();
+                          jobdiscriptioncontroller.clear();
+
+                          // clear the page
+
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text(
+                        "Submit",
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

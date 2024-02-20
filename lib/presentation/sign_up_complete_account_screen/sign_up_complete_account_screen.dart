@@ -99,28 +99,6 @@ class SignUpCompleteAccountScreen extends StatelessWidget {
                               obscureText: true,
                               contentPadding:
                                   getPadding(left: 16, top: 15, bottom: 15)),
-                          // Container(
-                          //     margin: getMargin(top: 16),
-                          //     padding: getPadding(
-                          //         left: 16, top: 12, right: 16, bottom: 12),
-                          //     decoration: AppDecoration.outlineIndigo.copyWith(
-                          //         borderRadius:
-                          //             BorderRadiusStyle.roundedBorder24),
-                          //     child: Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceBetween,
-                          //         children: [
-                          //           Padding(
-                          //               padding: getPadding(top: 5),
-                          //               child: Text("Select a country",
-                          //                   style: CustomTextStyles
-                          //                       .titleMediumMedium)),
-                          //           CustomImageView(
-                          //               svgPath: ImageConstant.imgArrowright,
-                          //               height: getSize(24),
-                          //               width: getSize(24),
-                          //               margin: getMargin(top: 1))
-                          //         ])),
                           CustomElevatedButton(
                               onTap: () {
                                 signUpuser(context);
@@ -132,7 +110,7 @@ class SignUpCompleteAccountScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Padding(
                                   padding:
-                                      getPadding(left: 40, top: 28, right: 40),
+                                      getPadding(left: 34, top: 28, right: 40),
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -180,19 +158,14 @@ class SignUpCompleteAccountScreen extends StatelessWidget {
                         ])))));
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  /// navigates back to the previous screen.
+
   onTapImgImage(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Navigates to the loginScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the loginScreen.
+  /// navigates to the loginScreen when the action is triggered.
+
   onTapTxtLargelabelmediu(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loginScreen);
   }

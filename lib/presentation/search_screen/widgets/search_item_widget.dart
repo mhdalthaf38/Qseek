@@ -46,7 +46,7 @@ class SearchItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Senior UI/UX Designer",
+                  "electrition kollom",
                   style: CustomTextStyles.titleMediumBold_1,
                 ),
                 Padding(
@@ -63,7 +63,7 @@ class SearchItemWidget extends StatelessWidget {
                     top: 12,
                   ),
                   child: Text(
-                    "560 - 12.000/Month",
+                    "560 - 1200",
                     style: CustomTextStyles.labelLargeGray600_1,
                   ),
                 ),

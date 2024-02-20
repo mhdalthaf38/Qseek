@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mohammed_s_application1/core/app_export.dart';
+import 'package:mohammed_s_application1/firebase_options.dart';
 import 'package:mohammed_s_application1/presentation/login_screen/auth_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,21 +18,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  @override
-  void initState() {
-    super.initState();
-    navigateTohome();
-  }
-
-  navigateTohome() async {
-    await Future.delayed(Duration(seconds: 5), () {});
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => AuthPage()),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
 
@@ -38,16 +27,38 @@ class _SplashScreenState extends State<SplashScreen> {
         body: SizedBox(
           width: double.maxFinite,
           child: CustomImageView(
-            svgPath: ImageConstant.imgGroup162797,
-            height: getVerticalSize(153),
-            width: getHorizontalSize(102),
+            imagePath: ImageConstant.splashimg,
+            height: getVerticalSize(300),
+            width: getHorizontalSize(300),
             alignment: Alignment.center,
-            margin: getMargin(
-              bottom: 5,
-            ),
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    navigateTohome();
+  }
+
+  navigateTohome() async {
+    await Future.delayed(Duration(seconds: 2), () async {
+      print('first');
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+          name: 'uploadpage', options: DefaultFirebaseOptions.currentPlatform);
+      FirebaseFirestore.instance.settings =
+          const Settings(persistenceEnabled: true);
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+    });
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => AuthPage()),
     );
   }
 }

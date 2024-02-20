@@ -3,7 +3,7 @@ class ImageConstant {
   static String imagePath = 'assets/images';
 
   // Splash Screen images
-  static String imgGroup162797 = '$imagePath/img_group162797.svg';
+  static String splashimg = '$imagePath/splashimg.png';
 
   // Onboarding One images
   static String imgImage = '$imagePath/img_image.png';
@@ -79,8 +79,11 @@ class ImageConstant {
 
   // Profile images
   static String imgBg = '$imagePath/img_bg.png';
-
+  static String profilepic = '$imagePath/profilepic.jpg';
   static String img63 = '$imagePath/img_63.png';
+  static String recpic = '$imagePath/recompic.jpg';
+  static String fyp = '$imagePath/fyp.jpg';
+  static String fyp1 = '$imagePath/pfyp.jpg';
 
   // Settings images
   static String imgPerson = '$imagePath/img_person.svg';
@@ -134,6 +137,8 @@ class ImageConstant {
   static String imgImage50x50 = '$imagePath/img_image_50x50.png';
 
   static String imgNotification = '$imagePath/img_notification.svg';
+
+  static String imglogout = '$imagePath/logout.png';
 
   static String imgFilterPrimary = '$imagePath/img_filter_primary.svg';
 

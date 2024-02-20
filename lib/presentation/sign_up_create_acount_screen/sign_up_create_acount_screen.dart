@@ -4,12 +4,8 @@ import 'package:mohammed_s_application1/widgets/custom_elevated_button.dart';
 import 'package:mohammed_s_application1/widgets/custom_outlined_button.dart';
 import 'package:mohammed_s_application1/widgets/custom_text_form_field.dart';
 
-// ignore_for_file: must_be_immutable
 class SignUpCreateAcountScreen extends StatelessWidget {
   SignUpCreateAcountScreen({Key? key}) : super(key: key);
-
-  // TextEditingController emailController = TextEditingController();
-  // TextEditingController passController = TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -168,28 +164,20 @@ class SignUpCreateAcountScreen extends StatelessWidget {
                         ])))));
   }
 
-  /// Navigates back to the previous screen.
-  ///
-  /// This function takes a [BuildContext] object as a parameter, which is used
-  /// to navigate back to the previous screen.
+  /// navigates back to the previous screen.
+
   onTapImgImage(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Navigates to the signUpCompleteAccountScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the signUpCompleteAccountScreen.
+  /// navigates to the signUpCompleteAccountScreen when the action is triggered.
+
   onTapContinuewith(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.signUpCompleteAccountScreen);
   }
 
-  /// Navigates to the loginScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the loginScreen.
+  /// navigates to the loginScreen when the action is triggered.
+
   onTapTxtLargelabelmediu(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loginScreen);
   }

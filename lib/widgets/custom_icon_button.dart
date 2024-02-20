@@ -77,7 +77,7 @@ extension IconButtonStyleHelper on CustomIconButton {
       );
   static BoxDecoration get fillOnPrimaryContainer => BoxDecoration(
         color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
-        borderRadius: BorderRadius.circular(getHorizontalSize(8.00)),
+        borderRadius: BorderRadius.circular(getHorizontalSize(50.00)),
       );
   static BoxDecoration get fillTealA => BoxDecoration(
         color: appTheme.tealA700,

@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDjot12Dj48eKsHgPTDD0R94XdJ_feoyqw',
-    appId: '1:791043729831:android:58ac1eaf98743271d96e82',
-    messagingSenderId: '791043729831',
-    projectId: 'qseek-33c17',
-    storageBucket: 'qseek-33c17.appspot.com',
+    apiKey: 'AIzaSyBvC0tWrm2iz9RBve_SErPucp0czRiokH4',
+    appId: '1:647849624245:android:727a953def3a2dec0ff4fc',
+    messagingSenderId: '647849624245',
+    projectId: 'uploaddata-33b36',
+    storageBucket: 'uploaddata-33b36.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB2-zHo3RR_61JBARYhI_u6l9tdFnaoeVY',
-    appId: '1:791043729831:ios:45bbb5529afa7a8bd96e82',
-    messagingSenderId: '791043729831',
-    projectId: 'qseek-33c17',
-    storageBucket: 'qseek-33c17.appspot.com',
+    apiKey: 'AIzaSyAjjJmN8UQaKTWIJ0R_myvt6hhbse8FLao',
+    appId: '1:647849624245:ios:1ca45e7c16461a5c0ff4fc',
+    messagingSenderId: '647849624245',
+    projectId: 'uploaddata-33b36',
+    storageBucket: 'uploaddata-33b36.appspot.com',
     iosBundleId: 'com.mohammedsapplication.app',
   );
 }

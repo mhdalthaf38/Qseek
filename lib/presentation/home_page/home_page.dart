@@ -28,7 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
-
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -40,10 +40,8 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(
           leadingWidth: getHorizontalSize(74),
           leading: AppbarCircleimage(
-            imagePath: ImageConstant.imgImage50x50,
-            margin: getMargin(
-              left: 24,
-            ),
+            imagePath: ImageConstant.profilepic,
+            margin: getMargin(left: 24, right: 10, top: 6),
           ),
           title: Padding(
             padding: getPadding(
@@ -54,11 +52,11 @@ class _HomePageState extends State<HomePage> {
               children: [
                 AppbarSubtitle(
                   text: "Hi, Welcome Back! 👋",
+                  margin: getMargin(top: 15),
                 ),
                 AppbarSubtitle2(
-                  text: "Find your dream job",
+                  text: "" + user.email.toString(),
                   margin: getMargin(
-                    top: 9,
                     right: 33,
                   ),
                 ),
@@ -68,12 +66,12 @@ class _HomePageState extends State<HomePage> {
           actions: [
             AppbarImage1(
               onTap: logOut,
-              svgPath: ImageConstant.imgNotification,
+              imagePath: ImageConstant.imglogout,
               margin: getMargin(
                 left: 24,
-                top: 13,
+                top: 18,
                 right: 24,
-                bottom: 13,
+                bottom: 0,
               ),
             ),
           ],
@@ -118,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                       bottom: 17,
                     ),
                     child: CustomImageView(
-                      svgPath: ImageConstant.imgFilterPrimary,
+                      svgPath: ImageConstant.recpic,
                     ),
                   ),
                   suffixConstraints: BoxConstraints(
@@ -149,137 +147,146 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Container(
-                            padding: getPadding(
-                              all: 16,
-                            ),
-                            decoration: AppDecoration.fillPrimary.copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder16,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomIconButton(
-                                  height: getSize(48),
-                                  width: getSize(48),
-                                  margin: getMargin(
-                                    bottom: 96,
-                                  ),
-                                  padding: getPadding(
-                                    all: 8,
-                                  ),
-                                  decoration: IconButtonStyleHelper
-                                      .fillOnPrimaryContainer,
-                                  child: CustomImageView(
-                                    svgPath: ImageConstant.imgFrame162722,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: getPadding(
-                                    left: 12,
-                                    top: 4,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Senior UI/UX Designer",
-                                        style: CustomTextStyles
-                                            .titleSmallGray5001Bold,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              padding: getPadding(
+                                all: 16,
+                              ),
+                              decoration: AppDecoration.fillPrimary.copyWith(
+                                borderRadius: BorderRadiusStyle.roundedBorder16,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomIconButton(
+                                    height: getSize(48),
+                                    width: getSize(48),
+                                    margin: getMargin(
+                                      bottom: 96,
+                                    ),
+                                    padding: getPadding(
+                                      all: 0,
+                                    ),
+                                    decoration: IconButtonStyleHelper
+                                        .fillOnPrimaryContainer,
+                                    child: ClipOval(
+                                      child: CustomImageView(
+                                        imagePath: ImageConstant.fyp1,
+                                        width: 100,
+                                        height: 100,
                                       ),
-                                      Opacity(
-                                        opacity: 0.8,
-                                        child: Padding(
-                                          padding: getPadding(
-                                            top: 7,
-                                          ),
-                                          child: Text(
-                                            "Shopee",
-                                            style: CustomTextStyles
-                                                .labelLargeGray5001SemiBold,
-                                          ),
-                                        ),
-                                      ),
-                                      Opacity(
-                                        opacity: 0.64,
-                                        child: Padding(
-                                          padding: getPadding(
-                                            top: 11,
-                                          ),
-                                          child: Text(
-                                            "Jakarta, Indonesia (Remote)",
-                                            style: CustomTextStyles
-                                                .labelLargeGray5001_2,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: getPadding(
-                                          top: 9,
-                                        ),
-                                        child: Text(
-                                          "1100 - 12.000/Month",
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: getPadding(
+                                      left: 12,
+                                      top: 4,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Electrician kollam",
                                           style: CustomTextStyles
-                                              .labelLargeGray5001_1,
+                                              .titleSmallGray5001Bold,
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: getPadding(
-                                          top: 17,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              padding: getPadding(
-                                                left: 12,
-                                                top: 5,
-                                                right: 12,
-                                                bottom: 5,
-                                              ),
-                                              decoration: AppDecoration
-                                                  .fillOnPrimaryContainer1
-                                                  .copyWith(
-                                                borderRadius: BorderRadiusStyle
-                                                    .roundedBorder16,
-                                              ),
-                                              child: Text(
-                                                "Fulltime",
-                                                style: CustomTextStyles
-                                                    .labelLargeGray5001,
-                                              ),
+                                        Opacity(
+                                          opacity: 0.8,
+                                          child: Padding(
+                                            padding: getPadding(
+                                              top: 7,
                                             ),
-                                            Container(
-                                              margin: getMargin(
-                                                left: 7,
-                                              ),
-                                              padding: getPadding(
-                                                left: 12,
-                                                top: 4,
-                                                right: 12,
-                                                bottom: 4,
-                                              ),
-                                              decoration: AppDecoration
-                                                  .fillOnPrimaryContainer1
-                                                  .copyWith(
-                                                borderRadius: BorderRadiusStyle
-                                                    .roundedBorder16,
-                                              ),
-                                              child: Text(
-                                                "Two days ago",
-                                                style: CustomTextStyles
-                                                    .labelLargeGray5001,
-                                              ),
+                                            child: Text(
+                                              "Shocker",
+                                              style: CustomTextStyles
+                                                  .labelLargeGray5001SemiBold,
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Opacity(
+                                          opacity: 0.64,
+                                          child: Padding(
+                                            padding: getPadding(
+                                              top: 11,
+                                            ),
+                                            child: Text(
+                                              "Pallimukku Kollam ",
+                                              style: CustomTextStyles
+                                                  .labelLargeGray5001_2,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: getPadding(
+                                            top: 9,
+                                          ),
+                                          child: Text(
+                                            "1100 - 1200",
+                                            style: CustomTextStyles
+                                                .labelLargeGray5001_1,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: getPadding(
+                                            top: 17,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding: getPadding(
+                                                  left: 12,
+                                                  top: 5,
+                                                  right: 12,
+                                                  bottom: 5,
+                                                ),
+                                                decoration: AppDecoration
+                                                    .fillOnPrimaryContainer1
+                                                    .copyWith(
+                                                  borderRadius:
+                                                      BorderRadiusStyle
+                                                          .roundedBorder16,
+                                                ),
+                                                child: Text(
+                                                  "Fulltime",
+                                                  style: CustomTextStyles
+                                                      .labelLargeGray5001,
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: getMargin(
+                                                  left: 7,
+                                                ),
+                                                padding: getPadding(
+                                                  left: 12,
+                                                  top: 4,
+                                                  right: 12,
+                                                  bottom: 4,
+                                                ),
+                                                decoration: AppDecoration
+                                                    .fillOnPrimaryContainer1
+                                                    .copyWith(
+                                                  borderRadius:
+                                                      BorderRadiusStyle
+                                                          .roundedBorder16,
+                                                ),
+                                                child: Text(
+                                                  "Two days ago",
+                                                  style: CustomTextStyles
+                                                      .labelLargeGray5001,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -305,12 +312,16 @@ class _HomePageState extends State<HomePage> {
                                     bottom: 96,
                                   ),
                                   padding: getPadding(
-                                    all: 8,
+                                    all: 0,
                                   ),
                                   decoration: IconButtonStyleHelper
                                       .fillOnPrimaryContainer,
-                                  child: CustomImageView(
-                                    svgPath: ImageConstant.imgFrame162722,
+                                  child: ClipOval(
+                                    child: CustomImageView(
+                                      imagePath: ImageConstant.fyp,
+                                      width: 100,
+                                      height: 100,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -323,7 +334,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Senior UI/UX Designer",
+                                        "Plumber Swargam",
                                         style: CustomTextStyles
                                             .titleSmallGray5001Bold,
                                       ),
@@ -334,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                                             top: 4,
                                           ),
                                           child: Text(
-                                            "Shopee",
+                                            "Plumber",
                                             style: CustomTextStyles
                                                 .labelLargeGray5001SemiBold,
                                           ),
@@ -348,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                                             top: 8,
                                           ),
                                           child: Text(
-                                            "Jakarta, Indonesia (Remote)",
+                                            "Vattavila Kollam",
                                             maxLines: null,
                                             overflow: TextOverflow.ellipsis,
                                             style: CustomTextStyles
@@ -364,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                                           top: 4,
                                         ),
                                         child: Text(
-                                          "1100 - 12.000/Month",
+                                          "1100 - 1200",
                                           style: CustomTextStyles
                                               .labelLargeGray5001_1,
                                         ),
@@ -473,117 +484,159 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(10),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Container(
-                                padding: getPadding(
-                                  all: 16,
-                                ),
-                                decoration:
-                                    AppDecoration.outlineIndigo.copyWith(
-                                  borderRadius:
-                                      BorderRadiusStyle.roundedBorder16,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        CustomIconButton(
-                                          height: getSize(48),
-                                          width: getSize(48),
-                                          padding: getPadding(
-                                            all: 8,
-                                          ),
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  margin: getMargin(
+                                    left: 16,
+                                  ),
+                                  padding: getPadding(
+                                    all: 16,
+                                  ),
+                                  decoration:
+                                      AppDecoration.fillDeepPurple.copyWith(
+                                    borderRadius:
+                                        BorderRadiusStyle.roundedBorder16,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomIconButton(
+                                        height: getSize(48),
+                                        width: getSize(48),
+                                        margin: getMargin(
+                                          bottom: 96,
+                                        ),
+                                        padding: getPadding(
+                                          all: 0,
+                                        ),
+                                        decoration: IconButtonStyleHelper
+                                            .fillOnPrimaryContainer,
+                                        child: ClipOval(
                                           child: CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgGroupPrimary,
+                                            imagePath: ImageConstant.fyp,
+                                            width: 100,
+                                            height: 100,
                                           ),
                                         ),
-                                        Padding(
-                                          padding: getPadding(
-                                            left: 12,
-                                            top: 4,
-                                            bottom: 2,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "",
-                                                style: CustomTextStyles
-                                                    .titleMediumBold_1,
-                                              ),
-                                              Padding(
+                                      ),
+                                      Padding(
+                                        padding: getPadding(
+                                          left: 12,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              name,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Opacity(
+                                              opacity: 0.8,
+                                              child: Padding(
                                                 padding: getPadding(
-                                                  top: 5,
+                                                  top: 4,
                                                 ),
                                                 child: Text(
-                                                  name,
-                                                  style: CustomTextStyles
-                                                      .labelLargeBluegray300SemiBold,
+                                                  jobtype,
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        CustomImageView(
-                                          svgPath: ImageConstant.imgBookmark,
-                                          height: getSize(24),
-                                          width: getSize(24),
-                                          margin: getMargin(
-                                            bottom: 25,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: getPadding(
-                                        left: 60,
-                                        top: 9,
-                                      ),
-                                      child: Text(
-                                        jobtype,
-                                        style: CustomTextStyles
-                                            .labelLargeGray600_1,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: getPadding(
-                                          top: 13,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CustomElevatedButton(
-                                              height: getVerticalSize(28),
-                                              width: getHorizontalSize(70),
-                                              text: salary,
-                                              buttonTextStyle:
-                                                  theme.textTheme.labelLarge!,
                                             ),
-                                            CustomElevatedButton(
-                                              height: getVerticalSize(28),
-                                              width: getHorizontalSize(103),
-                                              text: jobDiscription,
-                                              margin: getMargin(
-                                                left: 8,
+                                            Opacity(
+                                              opacity: 0.64,
+                                              child: Container(
+                                                width: getHorizontalSize(181),
+                                                margin: getMargin(
+                                                  top: 8,
+                                                ),
+                                                child: Text(jobDiscription,
+                                                    maxLines: null,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.white)),
                                               ),
-                                              buttonTextStyle:
-                                                  theme.textTheme.labelLarge!,
+                                            ),
+                                            Padding(
+                                              padding: getPadding(
+                                                top: 4,
+                                              ),
+                                              child: Text(
+                                                salary,
+                                                style: CustomTextStyles
+                                                    .labelLargeGray5001_1,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: getPadding(
+                                                top: 16,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    padding: getPadding(
+                                                      left: 12,
+                                                      top: 4,
+                                                      right: 12,
+                                                      bottom: 4,
+                                                    ),
+                                                    decoration: AppDecoration
+                                                        .fillOnPrimaryContainer1
+                                                        .copyWith(
+                                                      borderRadius:
+                                                          BorderRadiusStyle
+                                                              .roundedBorder16,
+                                                    ),
+                                                    child: Text(
+                                                      "Fulltime",
+                                                      style: CustomTextStyles
+                                                          .labelLargeGray5001,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: getMargin(
+                                                      left: 7,
+                                                    ),
+                                                    padding: getPadding(
+                                                      left: 12,
+                                                      top: 4,
+                                                      right: 12,
+                                                      bottom: 4,
+                                                    ),
+                                                    decoration: AppDecoration
+                                                        .fillOnPrimaryContainer1
+                                                        .copyWith(
+                                                      borderRadius:
+                                                          BorderRadiusStyle
+                                                              .roundedBorder16,
+                                                    ),
+                                                    child: Text(
+                                                      number.toString(),
+                                                      style: CustomTextStyles
+                                                          .labelLargeGray5001,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
