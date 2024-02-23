@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mohammed_s_application1/presentation/search_screen/search_screen.dart';
 import 'package:mohammed_s_application1/presentation/upload_page/upload_page.dart';
 import 'package:mohammed_s_application1/widgets/custom_elevated_button.dart';
 
@@ -27,6 +28,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+bool isDark = false;
+
 class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser!;
@@ -40,10 +43,17 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: appTheme.whiteA70001,
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(
-          leadingWidth: getHorizontalSize(74),
-          leading: AppbarCircleimage(
-            imagePath: ImageConstant.profilepic,
-            margin: getMargin(left: 24, right: 10, top: 6),
+          height: 90,
+          leadingWidth: 67,
+          leading: Container(
+            padding: EdgeInsets.only(top: 25, left: 10, right: 0, bottom: 7),
+            height: 70,
+            width: 70,
+            child: ClipOval(
+              child: CustomImageView(
+                imagePath: ImageConstant.fyp1,
+              ),
+            ),
           ),
           title: Padding(
             padding: getPadding(
@@ -84,48 +94,29 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.center,
-                child: CustomSearchView(
-                  margin: getMargin(
-                    left: 24,
-                    top: 30,
-                    right: 24,
-                  ),
-                  controller: searchController,
-                  hintText: "Search...",
-                  hintStyle: CustomTextStyles.titleMediumBluegray400,
-                  alignment: Alignment.center,
-                  prefix: Container(
-                    margin: getMargin(
-                      left: 16,
-                      top: 17,
-                      right: 8,
-                      bottom: 17,
+              Padding(
+                  padding: EdgeInsets.only(left: 30, right: 30, top: 20),
+                  child: SearchBar(
+                    textStyle:
+                        MaterialStatePropertyAll(TextStyle(color: Colors.grey)),
+                    padding:
+                        MaterialStatePropertyAll(EdgeInsets.only(left: 30)),
+                    hintText: 'Search...',
+                    backgroundColor: MaterialStatePropertyAll(
+                        const Color.fromARGB(255, 255, 255, 255)),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchScreen(),
+                          ));
+                    },
+                    leading: Icon(
+                      Icons.search_sharp,
+                      color: Colors.grey,
+                      size: 35,
                     ),
-                    child: CustomImageView(
-                      svgPath: ImageConstant.imgSearch,
-                    ),
-                  ),
-                  prefixConstraints: BoxConstraints(
-                    maxHeight: getVerticalSize(52),
-                  ),
-                  suffix: Container(
-                    margin: getMargin(
-                      left: 30,
-                      top: 17,
-                      right: 16,
-                      bottom: 17,
-                    ),
-                    child: CustomImageView(
-                      svgPath: ImageConstant.recpic,
-                    ),
-                  ),
-                  suffixConstraints: BoxConstraints(
-                    maxHeight: getVerticalSize(52),
-                  ),
-                ),
-              ),
+                  )),
               Padding(
                 padding: getPadding(
                   left: 24,
@@ -461,25 +452,25 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snapshot) {
                     // if we have data get all the doc
                     if (snapshot.hasData) {
-                      List Datalist = snapshot.data!.docs;
+                      List datalist = snapshot.data!.docs;
                       //display as  a list
                       return ListView.builder(
-                        itemCount: Datalist.length,
+                        itemCount: datalist.length,
                         itemBuilder: (context, index) {
                           //get each individual doc
 
-                          DocumentSnapshot document = Datalist[index];
+                          DocumentSnapshot document = datalist[index];
 
                           //get note frome each doc
                           Map<String, dynamic> data =
                               document.data() as Map<String, dynamic>;
                           String name = data['name'];
                           String jobtype = data['jobtype'];
-                          String jobDiscription = data['jobDiscription'];
-
                           String salary = data['salary'];
+                          String place = data['place'];
                           int number = data['number'];
                           String imgurl = data['image'];
+                          String timeSchedule = data['timeSchedule'];
 
                           // diaplay as a list tile
                           return Padding(
@@ -563,7 +554,7 @@ class _HomePageState extends State<HomePage> {
                                                 margin: getMargin(
                                                   top: 8,
                                                 ),
-                                                child: Text(jobDiscription,
+                                                child: Text(place,
                                                     maxLines: null,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -603,7 +594,7 @@ class _HomePageState extends State<HomePage> {
                                                               .roundedBorder16,
                                                     ),
                                                     child: Text(
-                                                      "Fulltime",
+                                                      timeSchedule,
                                                       style: CustomTextStyles
                                                           .labelLargeGray5001,
                                                     ),

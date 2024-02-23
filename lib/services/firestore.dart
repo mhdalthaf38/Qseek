@@ -11,16 +11,23 @@ class FirestoreService {
       FirebaseFirestore.instance.collection('uploaddata');
 
 //creat : add a new note
-  Future<void> addData(String name, String jobtype, String salary, int number,
-      String jobdiscription) {
+  Future<void> addData(
+    String name,
+    String jobtype,
+    String salary,
+    int number,
+    String place,
+    String timeschedule,
+  ) {
     return uploads.add({
       'name': name,
       'jobtype': jobtype,
       'salary': salary,
       'number': number,
-      'jobDiscription': jobdiscription,
+      'place': place,
       'timestamp': Timestamp.now(),
       'image': imageUrl,
+      'timeSchedule': timeschedule,
     });
   }
 

@@ -9,6 +9,7 @@ import 'package:mohammed_s_application1/widgets/app_bar/appbar_image.dart';
 import 'package:mohammed_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:mohammed_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 class PlaceholderDialog extends StatelessWidget {
   const PlaceholderDialog({
@@ -68,7 +69,13 @@ class _UploadPageState extends State<UploadPage> {
   final jobtypecontroller = TextEditingController();
   final salarycontroller = TextEditingController();
   final numbercontroller = TextEditingController();
-  final jobdiscriptioncontroller = TextEditingController();
+  final timeSchedule = TextEditingController();
+  final place = TextEditingController();
+  var items = [
+    'Full Time',
+    'Part Time',
+    'Daily works',
+  ];
   bool _validate = true;
 
   @override
@@ -128,7 +135,7 @@ class _UploadPageState extends State<UploadPage> {
                             try {
                               //store the file
                               await referenceImageToUpload
-                                  .putFile(File(file!.path));
+                                  .putFile(File(file.path));
                               imageUrl =
                                   await referenceImageToUpload.getDownloadURL();
                             } catch (error) {}
@@ -211,6 +218,54 @@ class _UploadPageState extends State<UploadPage> {
                   ),
                 ),
                 Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: timeSchedule,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text("Schedule Time"),
+                        prefixIcon: Icon(
+                          Icons.timelapse,
+                          shadows: [
+                            Shadow(
+                                color: Color.fromRGBO(0, 56, 101, 1),
+                                offset: Offset.zero,
+                                blurRadius: 1)
+                          ],
+                        ),
+                        suffixIcon: PopupMenuButton<String>(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          icon: const Icon(
+                            Icons.arrow_drop_down,
+                            shadows: [
+                              Shadow(
+                                  color: Color.fromRGBO(0, 56, 101, 1),
+                                  offset: Offset.zero,
+                                  blurRadius: 1)
+                            ],
+                          ),
+                          onSelected: (String value) {
+                            timeSchedule.text = value;
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return items
+                                .map<PopupMenuItem<String>>((String value) {
+                              return new PopupMenuItem(
+                                child: new Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                  selectionColor:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                ),
+                                value: value,
+                              );
+                            }).toList();
+                          },
+                        ),
+                      ),
+                    )),
+
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: numbercontroller,
@@ -234,7 +289,7 @@ class _UploadPageState extends State<UploadPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    controller: jobdiscriptioncontroller,
+                    controller: place,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.place,
@@ -271,7 +326,9 @@ class _UploadPageState extends State<UploadPage> {
                           _validate = false;
                         } else if (numbercontroller.text == "") {
                           _validate = false;
-                        } else if (jobdiscriptioncontroller.text == "") {
+                        } else if (timeSchedule.text == "") {
+                          _validate = false;
+                        } else if (place.text == "") {
                           _validate = false;
                         } else {
                           _validate = true;
@@ -318,10 +375,11 @@ class _UploadPageState extends State<UploadPage> {
                           //add data to firebase
                           firestoreService.addData(
                             namecontroller.text,
-                            jobtypecontroller.text,
+                            jobtypecontroller.text.toUpperCase(),
                             salarycontroller.text,
                             numbercontroller.hashCode,
-                            jobdiscriptioncontroller.text,
+                            place.text,
+                            timeSchedule.text,
                           );
 
                           // clear the text controller
@@ -330,7 +388,8 @@ class _UploadPageState extends State<UploadPage> {
                           jobtypecontroller.clear();
                           salarycontroller.clear();
                           numbercontroller.clear();
-                          jobdiscriptioncontroller.clear();
+                          place.clear();
+                          timeSchedule.clear();
 
                           // clear the page
 
